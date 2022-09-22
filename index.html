@@ -1,0 +1,123 @@
+<html>
+
+<head>
+
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+<style>
+
+#tabledata
+{
+  width:800px;
+  height:230px;
+  background-color:lightblue;
+  display:flex;
+}
+
+.countries
+{
+  background-color:pink;
+  display:inline;
+  width: 50px;
+}
+
+</style>
+
+<script src="//d3js.org/d3.v4.js"></script>
+
+<body>
+  <title> Covid 19 Statistics
+  </title>
+
+  <div id = "tabledata">
+  </div>
+
+  <p class = "test"> </p>
+
+</body>
+
+<script>
+
+var url = "https://api.covid19api.com/summary";
+var arr = [];
+var secondUrl = "https://restcountries.com/v3.1/all";
+
+var populations = 
+[
+  
+];
+
+
+$.get(secondUrl,function(data)
+{
+  for (var i = 0; i < data.length;i++)
+  {
+    $(".test").append("<p>" + data[i].population + "</p>")
+  }
+});
+
+
+
+
+$.get(url,function(data)
+{
+
+   var i = 0;
+
+   while(data.Countries[i].Country != undefined)
+   {
+    var str = "<div class = 'countries'> <p> Country: " + data.Countries[i].Country + "</p>";
+    //str = str.concat("<p> New Confirmed: " + data.Countries[i].NewConfirmed + "</p>");
+    //str = str.concat("<p> Total Confirmed: " + data.Countries[i].TotalConfirmed + "</p>");
+    //str = str.concat("<p> New Deaths: " + data.Countries[i].NewDeaths + "</p>");
+    //str = str.concat("<p> Total Deaths: " + data.Countries[i].TotalDeaths + "</p>");
+    //str = str.concat("<p> New Recovered: " + data.Countries[i].NewRecovered + "</p>");
+    //str = str.concat("<p> Total Recovered: " + data.Countries[i].TotalRecovered + "</p>");
+    //str = str.concat("</div>");
+    
+    $("#tabledata").append(str);
+    i++;
+   }
+});
+
+// var percentage = data.Countries[i].NewConfirmed/population[i]
+
+/* if (percentage < 0.1)
+{
+  
+}
+
+else if (percentage > 0.1)
+{
+  
+}
+
+else if (percentage > 0.3)
+{
+  
+}
+
+else if (percentage > 0.5)
+{
+  
+}
+
+else if (percentage > 0.7)
+{
+  
+}
+
+else if (percentage > 0.9)
+{
+  
+}
+
+
+*/
+
+</script> 
+
+</head>
+
+</html>
