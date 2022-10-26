@@ -33,9 +33,10 @@
     <thead>
       <tr>
         <th class = "each" ng-click = "sortBy('Country')" scope="col">Country <span class = "upAndDown"> &#8593&#8595 </span> </th>
-        <th class = "each" ng-click = "sortBy('NewConfirmed')" scope="col">Total Reported Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
-        <th class = "each" ng-click = "sortBy('TotalConfirmed')" scope="col">Daily Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
+        <th class = "each" ng-click = "sortBy('TotalConfirmed')" scope="col">Total Reported Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
+        <th class = "each" ng-click = "sortBy('NewConfirmed')" scope="col">Daily Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
         <th class = "each" ng-click = "sortBy('Population')" scope="col">Population <span class = "upAndDown"> &#8593&#8595 </span> </th>
+        <th class = "each" ng-click = "sortBy('CasePerPop')" scope="col">Covid Cases Per 100,000 Population <span class = "upAndDown"> &#8593&#8595 </span> </th>
         <th class = "each" ng-click = "sortBy('DailyPercent')" scope="col">Daily Spread Index<span class = "upAndDown"> &#8593&#8595 </span></th>
       </tr>
     </thead>
@@ -45,6 +46,7 @@
         <td class = "each">{{i.TotalConfirmed.toLocaleString()}}</td>
         <td class = "each">{{i.NewConfirmed.toLocaleString()}}</td>
         <td class = "each">{{i.Population.toLocaleString()}}</td>
+        <td class = "each">{{i.CasePerPop.toLocaleString()}}</td>
         <td class = "each">{{i.DailyPercent}}</td>
       </tr>
      
@@ -104,10 +106,17 @@ app.controller("insertData",function($scope,$http)
     for (var j = 0; j < $scope.countries.length; j++)
     {
       $scope.percent = $scope.countries[j].NewConfirmed/populations[j]
-      $scope.percent *=10000;
+      $scope.percent *= 10000;
       $scope.percent = $scope.percent.toFixed(2);
       $scope.countries[j]["DailyPercent"] = Number($scope.percent);
+
+      $scope.CasePerPopPercent = $scope.countries[j].TotalConfirmed/populations[j];
+      $scope.CasePerPopPercent *= 100000;
+      $scope.CasePerPopPercent = $scope.CasePerPopPercent.toFixed(2);
+      $scope.countries[j]["CasePerPop"] = Number($scope.CasePerPopPercent);
     }
+
+    
   },
     function error(response)
     {
