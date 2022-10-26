@@ -11,17 +11,23 @@ body
   
 }
 
-tbody
+.tableFixHead thead th
 {
-  overflow-x:hidden;
-  overflow-y:auto;
-  height: 100px;
+  position:sticky;
+  top:0;
+  background-color: gray;
 }
 
 table
 {
   border-collapse: collapse;
-  width: 100%;
+  width:100%;
+}
+
+.tableFixHead
+{
+  overflow-y: auto;
+  height:800px;  
 }
 
 #app thead th
