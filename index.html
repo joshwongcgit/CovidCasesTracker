@@ -32,6 +32,7 @@
    <table class="table table-responsive table-hover table-striped table-bordered">
     <thead>
       <tr>
+        <th class = "each" scope="col">#</th>
         <th class = "each" ng-click = "sortBy('Country')" scope="col">Country <span class = "upAndDown"> &#8593&#8595 </span> </th>
         <th class = "each" ng-click = "sortBy('TotalConfirmed')" scope="col">Total Reported Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
         <th class = "each" ng-click = "sortBy('NewConfirmed')" scope="col">Daily Covid Cases <span class = "upAndDown"> &#8593&#8595 </span> </th>
@@ -42,6 +43,7 @@
     </thead>
     <tbody>
       <tr ng-repeat = "i in countries|orderBy:sortType|filter:searchCountries">
+        <td class = "each">{{$index+1}}</td>
         <td class = "each">{{i.Country}}</td>
         <td class = "each">{{i.TotalConfirmed.toLocaleString()}}</td>
         <td class = "each">{{i.NewConfirmed.toLocaleString()}}</td>
